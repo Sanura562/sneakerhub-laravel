@@ -38,9 +38,10 @@
                     class="w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg transition">
                     Add to Cart
                 </button>
-                <a href="/checkout-page"
+                <a href="{{ route('checkout', ['id' => $product->_id]) }}"
                     class="mt-4 block w-full bg-black hover:bg-gray-800 text-white font-semibold py-3 px-6 rounded-lg text-center transition">
-                    Checkout
+                    Buy Now
+
                 </a>
             </div>
         </div>

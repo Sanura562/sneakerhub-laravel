@@ -3,25 +3,24 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutPage extends Component
 {
-    public $cartItems = [];
+    public $product;
     public $subtotal = 0;
     public $shipping = 0;
     public $total = 0;
     public $address = '';
-    public $paymentMethod = 'cod'; // e.g., cash on delivery
+    public $paymentMethod = 'cod';
 
-    public function mount()
+    public function mount($id)
     {
-        $cart = Cart::where('User_ID', Auth::id())->first();
-        $this->cartItems = $cart->items ?? [];
-        $this->subtotal = collect($this->cartItems)->sum('Total_Price');
-        $this->shipping = 0; // you can make this dynamic
+        $this->product = Product::findOrFail($id);
+        $this->subtotal = $this->product->Discount_Price ?? $this->product->Price;
+        $this->shipping = 0;
         $this->total = $this->subtotal + $this->shipping;
     }
 
@@ -34,14 +33,16 @@ class CheckoutPage extends Component
 
         Order::create([
             'user_id' => Auth::id(),
-            'items' => $this->cartItems,
+            'items' => [[
+                'ProductID' => $this->product->_id,
+                'Name' => $this->product->Name,
+                'Price' => $this->product->Discount_Price ?? $this->product->Price,
+            ]],
             'address' => $this->address,
             'total' => $this->total,
             'payment_method' => $this->paymentMethod,
             'status' => 'Pending',
         ]);
-
-        Cart::where('User_ID', Auth::id())->update(['items' => []]);
 
         session()->flash('message', 'Order placed successfully!');
         return redirect()->to('/thank-you');
@@ -51,4 +52,5 @@ class CheckoutPage extends Component
     {
         return view('livewire.checkout-page');
     }
+    
 }

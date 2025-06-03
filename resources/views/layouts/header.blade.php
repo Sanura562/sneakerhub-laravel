@@ -4,8 +4,7 @@
             <!-- Logo -->
             <div class="flex-shrink-0">
                 <a href="/" class="flex items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-                        class="h-8 w-auto" alt="Logo">
+
                     <span class="ml-2 font-semibold text-lg text-gray-800">SneakerHub</span>
                 </a>
             </div>

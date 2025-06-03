@@ -51,4 +51,9 @@ Route::get('/cart', CartPage::class)->name('cart');
 // Admin product list
 Route::get('/viewProducts', ViewProducts::class)->name('product.viewall');
 
+
+use App\Http\Livewire\CheckoutPage;
+
+Route::get('/checkout/{id}', CheckoutPage::class)->name('checkout');
+
 require __DIR__.'/auth.php';;
