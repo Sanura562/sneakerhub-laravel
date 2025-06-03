@@ -56,4 +56,20 @@ use App\Http\Livewire\CheckoutPage;
 
 Route::get('/checkout/{id}', CheckoutPage::class)->name('checkout');
 
+Route::get('/thank-you', function () {
+    return view('thank-you');
+})->name('thankyou');
+
+
+use App\Http\Livewire\UserProfile;
+
+Route::get('/user-profile', UserProfile::class)->middleware('auth')->name('user.profile');
+
+use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
+
+
 require __DIR__.'/auth.php';;

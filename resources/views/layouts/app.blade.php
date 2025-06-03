@@ -26,7 +26,7 @@
     <div class="min-h-screen bg-gray-100 pt-24">
         @include('layouts.header')
 
-        @livewire('navigation-menu')
+
 
 
 

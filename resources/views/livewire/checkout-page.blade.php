@@ -3,6 +3,17 @@
         <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 space-y-6">
             <h2 class="text-2xl font-bold text-gray-800">Checkout</h2>
 
+            <div class="border-b pb-4">
+                <h3 class="text-lg font-semibold text-gray-700">Product</h3>
+                <div class="flex justify-between text-gray-800 mt-2">
+                    <span>{{ $product->Name ?? 'Unknown Product' }}</span>
+                    @php
+                    $price = $product->Discount_Price !== null ? $product->Discount_Price : $product->Price;
+                    @endphp
+                    <span>${{ number_format($subtotal, 2) }}</span>
+                </div>
+            </div>
+
             <div>
                 <label class="block font-semibold mb-1">Shipping Address</label>
                 <textarea wire:model="address" class="w-full border rounded p-2"></textarea>

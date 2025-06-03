@@ -30,7 +30,7 @@
                         </p>
                         <p class="text-gray-500 text-sm mt-2">{{ Str::limit($product->Description, 100) }}</p>
                         <p class="text-indigo-600 font-bold mt-1">
-                            {{ $product->Price ? '$' . number_format($product->Price, 2) : 'N/A' }}
+                            {{ $product->Price ? 'LKR ' . number_format($product->Price, 2) : 'N/A' }}
                         </p>
                         <div class="mt-4 text-right">
                             <button wire:click.prevent="addToCart({{ $product->_id }})"

@@ -10,11 +10,13 @@ class Order extends Eloquent
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'User_ID',
+        'CartID',
+        'TotalAmount',
+        'Status',
+        'ShippingAddress',
+        'OrderDate',
         'items',
-        'address',
-        'total',
-        'payment_method',
-        'status'
+        'PaymentMethod'
     ];
 }
