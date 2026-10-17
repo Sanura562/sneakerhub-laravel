@@ -1,3 +1,46 @@
+# SneakerHub (Laravel)
+
+A sneaker store built with **Laravel 12 (PHP 8.2), Livewire 3, Jetstream (Fortify), MongoDB, JWT auth and Tailwind CSS**: product catalogue, cart, checkout, user accounts and an admin dashboard for managing products.
+
+- **Laravel app** (the original assignment): everything outside `frontend/` (`app/`, `routes/`, `resources/views/`, …).
+- **`frontend/`**: a React + Vite + Tailwind port of the same Blade/Livewire pages, so the store can be hosted as a static site on Cloudflare Pages. It talks to this Laravel app's JSON API (`routes/api.php`), or runs in **demo mode** with the products from `home.blade.php` and the browser's storage when no backend is running.
+
+## Run the Laravel app
+
+```bash
+composer install
+cp .env.example .env && php artisan key:generate && php artisan jwt:secret
+# set your MongoDB connection in .env, then:
+php artisan migrate
+npm install && npm run dev
+php artisan serve
+```
+
+## Run the frontend
+
+```bash
+cd frontend
+npm install
+cp .env.example .env     # VITE_DEMO_MODE=true (no backend) or false + VITE_API_URL=http://localhost:8000
+npm run dev
+```
+
+## Deploy the frontend on Cloudflare Pages
+
+Workers & Pages → Create → Pages → Connect to Git → `sneakerhub-laravel`:
+
+| Setting | Value |
+| --- | --- |
+| Root directory | `frontend` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Environment variables | `NODE_VERSION` = `22`, `VITE_DEMO_MODE` = `true` |
+
+`frontend/public/_redirects` sends every path to `index.html`, so URLs like `/store` and `/product/1` work on refresh.
+Demo login: `demo@sneakerhub.lk` / `demo1234` (or register a new account).
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
