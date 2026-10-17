@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers static-assets deploy for the React build.
+  "name": "sneakerhub-laravel",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Serve index.html for unknown paths so /store, /product/1 etc. work on refresh.
+    "not_found_handling": "single-page-application"
+  }
+}

@@ -25,18 +25,18 @@ cp .env.example .env     # VITE_DEMO_MODE=true (no backend) or false + VITE_API_
 npm run dev
 ```
 
-## Deploy the frontend on Cloudflare Pages
+## Deploy the frontend on Cloudflare (Workers)
 
-Workers & Pages → Create → Pages → Connect to Git → `sneakerhub-laravel`:
+Workers & Pages → `sneakerhub-laravel` → Settings → Build:
 
 | Setting | Value |
 | --- | --- |
-| Root directory | `frontend` |
+| Root directory (path) | `frontend` |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
-| Environment variables | `NODE_VERSION` = `22`, `VITE_DEMO_MODE` = `true` |
+| Deploy command | `npx wrangler deploy` |
+| Build variables | `NODE_VERSION` = `22`, `VITE_DEMO_MODE` = `true` |
 
-`frontend/public/_redirects` sends every path to `index.html`, so URLs like `/store` and `/product/1` work on refresh.
+`frontend/wrangler.jsonc` serves `dist/` as static assets with single-page-app fallback, so URLs like `/store` and `/product/1` work on refresh.
 Demo login: `demo@sneakerhub.lk` / `demo1234` (or register a new account).
 
 ---
